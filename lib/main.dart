@@ -10,25 +10,35 @@ Stream<String> getDateTime() => Stream.periodic(
       (_) => DateTime.now().toIso8601String(),
     );
 
-class MyApp extends HookWidget{
+class MyApp extends HookWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final dateTime = useStream(getDateTime());
+    final controller = useTextEditingController();
+    final text = useState('');
+    useEffect(
+      () {
+        controller.addListener(() {
+          text.value = controller.text;
+        });
+        return null;
+      },
+      [controller],
+    );
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-      appBar: AppBar(
-        title:  Text(dateTime.data ?? 'home page'),
+        appBar: AppBar(
+          title: Text('You typed: ${text.value}'),
+        ),
+        body: TextField(
+          controller: controller,
+        ),
       ),
-    ),
     );
   }
 }
-
-
-
