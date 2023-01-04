@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:practise_bloc/dialogs/generic_dialog.dart';
 import 'package:practise_bloc/strings.dart';
 
-typedef OnLoginTap = void Function({
-  required String email,
-  required String password,
-});
+typedef OnLoginTap = void Function(
+  String email,
+  String password,
+);
 
 class LoginButton extends StatelessWidget {
   final TextEditingController emailController;
@@ -35,8 +35,8 @@ class LoginButton extends StatelessWidget {
           );
         } else {
           onLoginTap(
-            email: email,
-            password: password,
+            email,
+            password,
           );
         }
       },

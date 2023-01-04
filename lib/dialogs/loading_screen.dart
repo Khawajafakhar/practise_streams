@@ -49,6 +49,7 @@ class LoadingScreen {
           color: Colors.black.withAlpha(150),
           child: Center(
             child: Container(
+              color: Colors.white,
               constraints: BoxConstraints(
                 maxHeight: size.height * 0.8,
                 maxWidth: size.width * 0.8,

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/foundation.dart' show immutable;
 import 'package:practise_bloc/models.dart';
 
@@ -16,9 +14,9 @@ abstract class LoginApiProtocol {
 @immutable
 class LoginApi implements LoginApiProtocol {
   // singleton pattren
-  const LoginApi._sharedInstance();
-  static const LoginApi _shared = LoginApi._sharedInstance();
-  factory LoginApi.instance() => _shared;
+  // const LoginApi._sharedInstance();
+  // static const LoginApi _shared = LoginApi._sharedInstance();
+  // factory LoginApi.instance() => _shared;
 
   @override
   Future<LoginHandle?> login({
