@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practise_bloc/api/login_api.dart';
-import 'package:practise_bloc/api/login_handle.dart';
 import 'package:practise_bloc/api/notes_api.dart';
 import 'package:practise_bloc/models.dart';
 import './actions.dart';
@@ -43,6 +42,40 @@ class AppBloc extends Bloc<AppActions, AppState> {
             isloading: false,
             loginError: null,
             loginHandle: fooBarHandle,
+            fetchedNotes: null,
+          ),
+        );
+      }
+    });
+
+    on<LoadNotes>((event, emit) async {
+      emit(
+        AppState(
+          isloading: true,
+          loginError: null,
+          loginHandle: state.loginHandle,
+          fetchedNotes: null,
+        ),
+      );
+      final loginHandle = state.loginHandle;
+      if (loginHandle == const LoginHandle.fooBar()) {
+        final notes = await notesApi.getNotes(
+          loginHandle: loginHandle!,
+        );
+        emit(
+          AppState(
+            isloading: false,
+            loginError: null,
+            loginHandle: loginHandle,
+            fetchedNotes: notes,
+          ),
+        );
+      } else {
+        emit(
+          AppState(
+            isloading: false,
+            loginError: LoginErrors.invalidHandle,
+            loginHandle: loginHandle,
             fetchedNotes: null,
           ),
         );
