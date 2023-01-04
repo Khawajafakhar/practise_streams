@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:practise_bloc/dialogs/generic_dialog.dart';
 import 'package:practise_bloc/strings.dart';
 
-typedef OnLoginTap = void Function();
+typedef OnLoginTap = void Function({
+  required String email,
+  required String password,
+});
 
 class LoginButton extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
+  final OnLoginTap onLoginTap;
   const LoginButton({
     super.key,
     required this.emailController,
     required this.passwordController,
-    required OnLoginTap onLoginTap,
+    required this.onLoginTap,
   });
 
   @override
@@ -28,6 +32,11 @@ class LoginButton extends StatelessWidget {
             optionBuilder: () => {
               ok: true,
             },
+          );
+        } else {
+          onLoginTap(
+            email: email,
+            password: password,
           );
         }
       },
